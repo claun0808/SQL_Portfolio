@@ -11,7 +11,7 @@ SELECT
     player_season_key,
     player_id,
     season,
-    name,
+    player_name,
     age,
     hr,
     r,
@@ -33,7 +33,7 @@ INTO
 FROM
 	stats_batting_majors
 WHERE
-	PA >= 400 --I limited the pool of players to be considered a postive outcome to only those with at least 400 plate appearances in the season to reduce anomolous records
+	pa >= 400 --I limited the pool of players to be considered a postive outcome to only those with at least 400 plate appearances in the season to reduce anomolous records
 
 --Here we add two more fields to the ranks to capture the overall value of each player across all the categories
 if object_id('dbo.ranks_batting') is not null
@@ -59,8 +59,8 @@ SELECT
     identity(int,1,1) as model_id,  --This was used in a later step for bootstrapping the historical batting data for modeling
     a.player_season_key,
     a.player_id,
-    a.Name,
-    a.Season,
+    a.player_name,
+    a.season,
     case when b.r_pct >= @percent_target then 1 else 0 end       as r_outcome,
     case when b.rbi_pct >= @percent_target then 1 else 0 end     as rbi_outcome,
     case when b.hr_pct >= @percent_target then 1 else 0 end      as hr_outcome,
@@ -74,7 +74,7 @@ FROM
 LEFT JOIN
 	ranks_batting b on a.player_season_key = b.player_season_key
 WHERE
-	a.AB >= 100  --Only including players with at least 100 at bats in the season to be modeled
+	a.ab >= 100  --Only including players with at least 100 at bats in the season to be modeled
    
 DROP table ranks_batting_STAGE
 
