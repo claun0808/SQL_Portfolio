@@ -217,7 +217,7 @@ final as (
           month_5_count +
           month_6_count > 0
 
-    group by 1,2,3
+    group by 1
     
 )
 
