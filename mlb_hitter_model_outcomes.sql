@@ -33,7 +33,7 @@ INTO
 FROM
     stats_batting_majors
 WHERE
-    pa >= 400 --I limited the pool of players to be considered a postive outcome to only those with at least 400 plate appearances in the season to reduce anomolous records
+    pa >= 400 --I limited the pool of players to be considered a positive outcome to only those with at least 400 plate appearances in the season to reduce anomolous records
 
 --Here we add two more fields to the ranks to capture the overall value of each player across all the categories
 if object_id('dbo.ranks_batting') is not null
